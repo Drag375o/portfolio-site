@@ -1,14 +1,14 @@
 /**
  * The canonical origin, resolved in one place.
  *
- * Order: an explicit NEXT_PUBLIC_SITE_URL wins (set this if you buy a domain),
- * then Vercel's own production URL at build time, then localhost for dev. No
- * component or route ever hardcodes a domain, so moving from a .vercel.app
- * subdomain to a real one is a single environment variable and a redeploy.
+ * Production is hardcoded on purpose: Vercel's own URL variables track the
+ * project name, which changed once already and silently left canonical and OG
+ * tags pointing at a dead alias. NEXT_PUBLIC_SITE_URL still wins if set, so a
+ * custom domain later is one variable and no code change.
  */
+const PRODUCTION = 'https://atahar-piash.vercel.app';
+
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : 'http://localhost:3000')
+  (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : PRODUCTION)
 ).replace(/\/$/, '');
