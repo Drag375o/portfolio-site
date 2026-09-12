@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env*.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# working notes, not part of the site
+DEPLOY.md
+PROJECT-STATE.md
+RESTART-PROMPT.md
